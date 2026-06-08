@@ -1,6 +1,7 @@
 import { allPosts } from "content-collections";
 import { formatDate } from "@/lib/utils";
 import { DATA } from "@/data/resume";
+import { SITE_URL } from "@/lib/site";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXContent } from "@content-collections/mdx/react";
@@ -52,11 +53,11 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `${DATA.url}/blog/${slug}`,
+      url: `${SITE_URL}/blog/${slug}`,
       ...(image && {
         images: [
           {
-            url: `${DATA.url}${image}`,
+            url: `${SITE_URL}${image}`,
           },
         ],
       }),
@@ -66,7 +67,7 @@ export async function generateMetadata({
       title,
       description,
       ...(image && {
-        images: [`${DATA.url}${image}`],
+        images: [`${SITE_URL}${image}`],
       }),
     },
   };
@@ -104,9 +105,9 @@ export default async function Blog({
     dateModified: post.publishedAt,
     description: post.summary,
     image: post.image
-      ? `${DATA.url}${post.image}`
-      : `${DATA.url}/blog/${slug}/opengraph-image`,
-    url: `${DATA.url}/blog/${slug}`,
+      ? `${SITE_URL}${post.image}`
+      : `${SITE_URL}/blog/${slug}/opengraph-image`,
+    url: `${SITE_URL}/blog/${slug}`,
     author: {
       "@type": "Person",
       name: DATA.name,
