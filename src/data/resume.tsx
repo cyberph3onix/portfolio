@@ -165,7 +165,7 @@ export const DATA = {
     },
     {
       school: "St.Xavier's Institution",
-      href: "https://uwaterloo.ca",
+      href: "https://sxipanihati.org/sxip/",
       degree: "Higher Secondary Education (CISCE)",
       logoUrl: "/sxi_logo.jpg",
       start: "2016",
