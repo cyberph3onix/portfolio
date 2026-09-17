@@ -8,7 +8,15 @@ import Link from "next/link";
 import { useState } from "react";
 import Markdown from "react-markdown";
 
-function ProjectImage({ src, alt }: { src: string; alt: string }) {
+function ProjectImage({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
   const [imageError, setImageError] = useState(false);
 
   if (!src || imageError) {
@@ -19,7 +27,7 @@ function ProjectImage({ src, alt }: { src: string; alt: string }) {
     <img
       src={src}
       alt={alt}
-      className="w-full h-48 object-cover"
+      className={cn("w-full h-48 object-cover", className)}
       onError={() => setImageError(true)}
     />
   );
@@ -40,6 +48,7 @@ interface Props {
     href: string;
   }[];
   className?: string;
+  imageClassName?: string;
 }
 
 export function ProjectCard({
@@ -53,6 +62,7 @@ export function ProjectCard({
   video,
   links,
   className,
+  imageClassName,
 }: Props) {
   return (
     <div
@@ -78,7 +88,7 @@ export function ProjectCard({
               className="w-full h-48 object-cover"
             />
           ) : image ? (
-            <ProjectImage src={image} alt={title} />
+            <ProjectImage src={image} alt={title} className={imageClassName} />
           ) : (
             <div className="w-full h-48 bg-muted" />
           )}

@@ -5,7 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import ContactSection from "@/components/section/contact-section";
 import GitHubActivitySection from "@/components/section/github-activity-section";
 import HackathonsSection from "@/components/section/hackathons-section";
 import ProjectsSection from "@/components/section/projects-section";
@@ -127,6 +126,8 @@ export default function Page() {
                 <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
                   {"icon" in skill && skill.icon ? (
                     <skill.icon className="size-4 rounded overflow-hidden object-contain" />
+                  ) : "logoUrl" in skill && skill.logoUrl ? (
+                    <img src={skill.logoUrl} alt={skill.name} className="size-4 rounded overflow-hidden object-contain" />
                   ) : null}
                   <span className="text-foreground text-sm font-medium">{skill.name}</span>
                 </div>
@@ -146,11 +147,6 @@ export default function Page() {
       <section id="hackathons">
         <BlurFade delay={BLUR_FADE_DELAY * 14}>
           <HackathonsSection />
-        </BlurFade>
-      </section>
-      <section id="contact">
-        <BlurFade delay={BLUR_FADE_DELAY * 16}>
-          <ContactSection />
         </BlurFade>
       </section>
     </main>

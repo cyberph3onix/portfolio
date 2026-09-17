@@ -19,25 +19,31 @@ export const DATA = {
   location: "Kolkata, India",
   locationLink: "https://www.google.com/maps/place/kolkata",
   description:
-    "Aspiring software engineer. I love building things and helping people. Very active on Twitter.",
+    "I like to break and build stuff up, always trying to build something that matters, ai and web3 builder, 2x hack Ws",
   summary:
     "Started my CS journey in 2024. Currently I'm pursuing a degree in computer science and engineering at Institute of engineering & Management, Kolkata. Building on web3 and AI projects in my free time. Always looking for new opportunities to learn and grow.",
   avatarUrl: "/me.png",
   skills: [
-    // { name: "Next.js", icon: NextjsIconDark },
-    // { name: "Typescript", icon: Typescript },
-    // { name: "Node.js", icon: Nodejs },
     { name: "Python", icon: Python },
-    // { name: "Go", icon: Golang },
+    { name: "Next.js", icon: NextjsIconDark },
+    { name: "TypeScript", icon: Typescript },
+    { name: "Node.js", icon: Nodejs },
+    { name: "Go", icon: Golang },
+    { name: "React", icon: ReactLight },
     { name: "Postgres", icon: Postgresql },
     { name: "Docker", icon: Docker },
     { name: "Kubernetes", icon: Kubernetes },
     { name: "Java", icon: Java },
     { name: "C++", icon: Csharp },
+    { name: "Solidity", logoUrl: "/solidity.png" },
+    { name: "PyTorch", logoUrl: "/pytorch.png" },
+    { name: "MongoDB", logoUrl: "/mongodb.png" },
+    { name: "Tailwind CSS", logoUrl: "/tailwindcss.png" },
+    { name: "Redis", logoUrl: "/redis.png" },
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-   // { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/blog", icon: NotebookIcon, label: "Blog" },
   ],
   contact: {
     email: "guptaraaj0505@gmail.com",
@@ -174,6 +180,37 @@ export const DATA = {
   ],
   projects: [
     {
+      title: "Kairos",
+      href: "https://kairos.x7710.xyz/",
+      dates: "June 2026 - Present",
+      active: true,
+      description:
+        "Intent-based, non-custodial capital delegation on Stellar Soroban where AI proposes and on-chain policies dispose. Deploy a personal Smart Wallet, grant scoped and revocable delegations, and execute trades enforced strictly by on-chain policies.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "Soroban",
+        "Rust",
+        "Stellar",
+        "TailwindCSS",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://kairos.x7710.xyz/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/wolf1276/kairos",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/kairos.png",
+      imageClassName: "object-contain bg-black",
+      video: "",
+    },
+    {
       title: "Formula-1 race predictor",
       href: "https://github.com/cyberph3onix/ProjectF1",
       dates: "Jan 2024 - Present",
@@ -199,6 +236,39 @@ export const DATA = {
         "",
     },
     {
+      title: "Jigyasa",
+      href: "https://hhgoa-ragtask.vercel.app/",
+      dates: "Aug 2026 - Present",
+      active: true,
+      description:
+        "A voice-first Hindi RAG assistant built on the MS MARCO-XI corpus using hybrid dense (FAISS HNSW) and sparse (BM25) retrieval with cross-encoder reranking and strict grounding guardrails.",
+      technologies: [
+        "Python",
+        "FastAPI",
+        "FAISS",
+        "BM25",
+        "RAG",
+        "Next.js",
+        "TypeScript",
+        "Gemini",
+        "Sarvam STT",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://hhgoa-ragtask.vercel.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/cyberph3onix/hhgoa_ragtask",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/jigyasa.png",
+      video: "",
+    },
+    {
       title: "Ragged",
       href: "https://github.com/cyberph3onix/ragged",
       dates: "June 2026 - Present",
@@ -220,7 +290,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "https://media.istockphoto.com/id/1253437873/vector/yellow-warning-sign-work-in-progress-background.jpg?s=612x612&w=is&k=20&c=d2nA8N3OrZLrn59hioiUvu9CbVHyRWvzJn_S1vgqwCw=",
+      image: "/workinprogress.png",
       video: "",
     },
     {
@@ -243,7 +313,7 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "",
+      image: "/workinprogress.png",
       video: "",
     },
     // {
