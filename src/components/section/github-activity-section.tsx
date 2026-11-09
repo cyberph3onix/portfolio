@@ -210,6 +210,51 @@ async function fetchContributions(username: string): Promise<GitHubStatsResult |
   }
 }
 
+async function fetchPublicContributions(username: string): Promise<GitHubStatsResult | null> {
+  if (!username) {
+    return null;
+  }
+
+  try {
+    const response = await fetch(
+      `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
+      { next: { revalidate: REVALIDATE_SECONDS } }
+    );
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const json = (await response.json()) as {
+      contributions?: { date: string; count: number }[];
+    };
+
+    if (!json.contributions?.length) {
+      return null;
+    }
+
+    const days = json.contributions.slice(-DAYS_TO_SHOW).map((day) => ({
+      date: new Date(`${day.date}T00:00:00Z`),
+      key: day.date,
+      count: day.count,
+    }));
+
+    const { totalEvents, activeDays, currentStreak } = summarize(days);
+
+    return {
+      days,
+      metricLabel: "GitHub contributions",
+      totalEvents,
+      activeDays,
+      currentStreak,
+      repoCount: null,
+      unavailable: false,
+    };
+  } catch {
+    return null;
+  }
+}
+
 async function fetchEvents(username: string): Promise<GitHubStatsResult> {
   if (!username) {
     return unavailableResult();
@@ -257,9 +302,10 @@ async function fetchEvents(username: string): Promise<GitHubStatsResult> {
 }
 
 export default async function GitHubActivitySection() {
-  const stats = GITHUB_TOKEN
-    ? ((await fetchContributions(GITHUB_USERNAME)) ?? (await fetchEvents(GITHUB_USERNAME)))
-    : await fetchEvents(GITHUB_USERNAME);
+  const stats =
+    (GITHUB_TOKEN ? await fetchContributions(GITHUB_USERNAME) : null) ??
+    (await fetchPublicContributions(GITHUB_USERNAME)) ??
+    (await fetchEvents(GITHUB_USERNAME));
 
   const { days, metricLabel, unavailable } = stats;
 
