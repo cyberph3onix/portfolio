@@ -153,8 +153,8 @@ async function fetchContributions(username: string): Promise<GitHubStatsResult |
         query,
         variables: {
           username,
-          from: fromKey,
-          to: toKey,
+          from: `${fromKey}T00:00:00Z`,
+          to: `${toKey}T00:00:00Z`,
         },
       }),
       next: { revalidate: REVALIDATE_SECONDS },
