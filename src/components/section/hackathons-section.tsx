@@ -12,28 +12,26 @@ export default function HackathonsSection() {
           <div className="flex items-center w-full">
             <div className="flex-1 h-px bg-linear-to-r from-transparent from-5% via-border via-95% to-transparent" />
             <div className="border bg-primary z-10 rounded-xl px-4 py-1">
-              <span className="text-background text-sm font-medium">Hackathons</span>
+              <span className="text-background text-sm font-medium">Achievements</span>
             </div>
             <div className="flex-1 h-px bg-linear-to-l from-transparent from-5% via-border via-95% to-transparent" />
           </div>
           <div className="flex flex-col gap-y-3 items-center justify-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">I like building things</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center">Hackathons &amp; recognition</h2>
             <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
-              Since my time in university, I attended {DATA.hackathons.length}+
-              hackathons. People from around the country come together and
-              build incredible things in 2-3 days. It is eye-opening to see the endless possibilities brought to life by a group of motivated and passionate individuals.
+              4x hackathon winner. I like turning ideas into working prototypes in a weekend, from zero-knowledge credentials to non-custodial wallets.
             </p>
           </div>
         </div>
         <Timeline>
-          {DATA.hackathons.map((hackathon) => (
-            <TimelineItem key={hackathon.title + hackathon.dates} className="w-full flex items-start justify-between gap-10">
+          {DATA.achievements.map((hackathon) => (
+            <TimelineItem key={hackathon.title} className="w-full flex items-start justify-between gap-10">
               <TimelineConnectItem className="flex items-start justify-center">
                 {hackathon.image ? (
                   <img
                     src={hackathon.image}
                     alt={hackathon.title}
-                    className="size-10 bg-card z-10 shrink-0 overflow-hidden p-1 border rounded-full shadow ring-2 ring-border object-contain flex-none"
+                    className={`size-10 bg-card z-10 shrink-0 overflow-hidden p-1 border rounded-full shadow ring-2 ring-border object-contain flex-none ${hackathon.image.includes("stellar") ? "dark:invert p-1.5" : ""}`}
                   />
                 ) : (
                   <div className="size-10 bg-card z-10 shrink-0 overflow-hidden p-1 border rounded-full shadow ring-2 ring-border flex-none" />

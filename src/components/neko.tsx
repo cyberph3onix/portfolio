@@ -12,6 +12,7 @@ declare global {
   interface Window {
     createNeko?: (options?: Record<string, unknown>) => NekoInstance;
     neko?: NekoInstance;
+    BehaviorMode?: { CHASE_MOUSE: unknown };
   }
 }
 
@@ -21,7 +22,19 @@ export default function Neko() {
 
     const start = () => {
       if (window.createNeko && !neko) {
-        neko = window.createNeko();
+        neko = window.createNeko({
+          behaviorMode: window.BehaviorMode?.CHASE_MOUSE,
+          allowBehaviorChange: false,
+          speed: 50,
+          // Phones have no cursor: park the cat bottom-right, above the dock,
+          // and let it chase your finger when you touch the screen.
+          ...(window.matchMedia("(pointer: coarse)").matches
+            ? {
+                startX: window.innerWidth - 48,
+                startY: window.innerHeight - 112,
+              }
+            : {}),
+        });
       }
     };
 

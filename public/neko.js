@@ -81,6 +81,10 @@
 
   // Animation timing constants (in frames)
   const STOP_TIME = 4;
+  // After the cursor has been still this long, the cat does tricks...
+  const TRICK_AFTER_MS = 5000;
+  // ...for this long, then finally settles down and falls asleep.
+  const TRICK_PHASE_MS = 25000;
   const WASH_TIME = 10;
   const SCRATCH_TIME = 4;
   const YAWN_TIME = 3;
@@ -92,6 +96,7 @@
 
   class Neko {
     constructor(options = {}) {
+      this.options = options;
       // Configuration
       this.fps = options.fps || 120; // Target FPS (default 120 for smooth movement)
       // Original used 16 pixels/tick for 640x480 screens (~2.5% of width)
@@ -237,7 +242,20 @@
         this.mouseX = e.clientX;
         this.mouseY = e.clientY;
         this.hasMouseMoved = true;
+        this.lastMouseMoveAt = performance.now();
       });
+
+      // Touch screens have no cursor: chase the finger instead
+      const onTouch = (e) => {
+        const t = e.touches && e.touches[0];
+        if (!t) return;
+        this.mouseX = t.clientX;
+        this.mouseY = t.clientY;
+        this.hasMouseMoved = true;
+        this.lastMouseMoveAt = performance.now();
+      };
+      document.addEventListener("touchstart", onTouch, { passive: true });
+      document.addEventListener("touchmove", onTouch, { passive: true });
 
       // Update bounds on resize
       window.addEventListener("resize", () => {
@@ -246,8 +264,14 @@
       });
 
       // Random starting position within viewport
-      this.x = Math.random() * this.boundsWidth;
-      this.y = Math.random() * this.boundsHeight;
+      this.x =
+        typeof this.options.startX === "number"
+          ? Math.max(0, Math.min(this.boundsWidth, this.options.startX))
+          : Math.random() * this.boundsWidth;
+      this.y =
+        typeof this.options.startY === "number"
+          ? Math.max(0, Math.min(this.boundsHeight, this.options.startY))
+          : Math.random() * this.boundsHeight;
       this.logicX = this.x;
       this.logicY = this.y;
       this.prevLogicX = this.x;
@@ -322,8 +346,14 @@
       // We need to accumulate fractional ticks and process when we hit a full tick
       if (this.tickAccumulator === undefined) this.tickAccumulator = 0;
 
-      const originalFPS = 5;
-      this.tickAccumulator += originalFPS / this.fps;
+      // Advance by REAL elapsed time (one original tick = 200ms), not by how
+      // often the timer happened to fire, so the speed stays constant even when
+      // the browser's setInterval jitters or the page is briefly busy.
+      const now = performance.now();
+      if (this.lastUpdateAt === undefined) this.lastUpdateAt = now;
+      const dt = Math.min(now - this.lastUpdateAt, 250);
+      this.lastUpdateAt = now;
+      this.tickAccumulator += dt / 200;
 
       // Process as many original ticks as have accumulated
       while (this.tickAccumulator >= 1) {
@@ -344,7 +374,48 @@
       this.updatePosition();
     }
 
+    avoidRects() {
+      return Array.from(document.querySelectorAll("[data-neko-avoid]"))
+        .map((el) => el.getBoundingClientRect())
+        .filter((r) => r.width > 0 && r.height > 0);
+    }
+
+    hitsAvoid(x, y, rects) {
+      return rects.some(
+        (r) =>
+          x + SPRITE_SIZE > r.left &&
+          x < r.right &&
+          y + SPRITE_SIZE > r.top &&
+          y < r.bottom
+      );
+    }
+
     processOriginalTick() {
+      // Never stay inside an avoid region (e.g. the embedded resume)
+      const rects = this.avoidRects();
+      this.avoid = rects;
+      if (rects.length && this.hitsAvoid(this.logicX, this.logicY, rects)) {
+        const r = rects.find((q) => this.hitsAvoid(this.logicX, this.logicY, [q]));
+        const options = [
+          [r.left - SPRITE_SIZE - 1, this.logicY],
+          [r.right + 1, this.logicY],
+          [this.logicX, r.top - SPRITE_SIZE - 1],
+          [this.logicX, r.bottom + 1],
+        ].filter(
+          ([x, y]) =>
+            x >= 0 && x <= this.boundsWidth && y >= 0 && y <= this.boundsHeight
+        );
+        if (options.length) {
+          options.sort(
+            (a, b) =>
+              Math.hypot(a[0] - this.logicX, a[1] - this.logicY) -
+              Math.hypot(b[0] - this.logicX, b[1] - this.logicY)
+          );
+          this.logicX = this.prevLogicX = options[0][0];
+          this.logicY = this.prevLogicY = options[0][1];
+        }
+      }
+
       // This runs at the original 5 FPS equivalent timing
       // Increment tick counter (like m_uTickCount)
       this.tickCount++;
@@ -388,7 +459,85 @@
         );
         return;
       }
+      // Cursor/finger has been still for a while and the cat is already sitting
+      // beside it: do something fun instead of just dozing off.
+      const idleMs = performance.now() - (this.lastMouseMoveAt || 0);
+      if (idleMs < TRICK_AFTER_MS) {
+        this.trick = null;
+      } else if (idleMs < TRICK_AFTER_MS + TRICK_PHASE_MS) {
+        if (!this.trick) {
+          const cx = this.logicX + SPRITE_SIZE / 2 - this.mouseX;
+          const cy = this.logicY + SPRITE_SIZE - 1 - this.mouseY;
+          if (Math.hypot(cx, cy) < SPRITE_SIZE * 2.5) this.startTrick();
+        }
+        if (this.trick) {
+          this.runTrick();
+          return;
+        }
+      }
       this.runTowards(this.mouseX, this.mouseY);
+    }
+
+    // ---- idle tricks -------------------------------------------------
+    startTrick() {
+      const mx = this.mouseX;
+      const my = this.mouseY;
+      const clampX = (x) => Math.max(SPRITE_SIZE, Math.min(this.boundsWidth, x));
+      const clampY = (y) => Math.max(SPRITE_SIZE, Math.min(this.boundsHeight, y));
+      const kinds = ["orbit", "zoomies", "pounce", "groom"];
+      let kind = kinds[Math.floor(Math.random() * kinds.length)];
+      if (kind === this.lastTrick) {
+        kind = kinds[(kinds.indexOf(kind) + 1) % kinds.length];
+      }
+      this.lastTrick = kind;
+      let points = [];
+      let dwell = 0;
+      if (kind === "orbit") {
+        // run a lap around the cursor
+        const r = 90;
+        for (let i = 0; i < 10; i++) {
+          const a = (i / 10) * Math.PI * 2;
+          points.push([clampX(mx + Math.cos(a) * r), clampY(my + Math.sin(a) * r)]);
+        }
+        points.push([mx, my]);
+      } else if (kind === "zoomies") {
+        // sudden sprints around the neighbourhood, then home
+        for (let i = 0; i < 5; i++) {
+          points.push([
+            clampX(mx + (Math.random() * 2 - 1) * 280),
+            clampY(my + (Math.random() * 2 - 1) * 200),
+          ]);
+        }
+        points.push([mx, my]);
+      } else if (kind === "pounce") {
+        // sneak away, stare, then dash back
+        const dir = Math.random() < 0.5 ? -1 : 1;
+        points = [[clampX(mx + dir * 220), my], [mx, my]];
+        dwell = 8;
+      } else {
+        // sit right here and groom (wash / scratch / yawn)
+        points = [[mx, my]];
+        dwell = 14;
+      }
+      this.trick = { points, i: 0, wait: 0, dwell, loops: 0 };
+    }
+
+    runTrick() {
+      const t = this.trick;
+      const [tx, ty] = t.points[t.i];
+      this.runTowards(tx, ty);
+      const dx = tx - this.logicX - SPRITE_SIZE / 2;
+      const dy = ty - this.logicY - SPRITE_SIZE + 1;
+      if (Math.hypot(dx, dy) <= this.speed) {
+        t.wait++;
+        if (t.wait > t.dwell) {
+          t.wait = 0;
+          t.i++;
+          if (t.i >= t.points.length) {
+            this.trick = null; // finished; a new trick starts next tick
+          }
+        }
+      }
     }
 
     runAwayFromMouse() {
@@ -550,12 +699,20 @@
       this.lastMoveDY = this.moveDY;
 
       // Check if target moved (MoveStart equivalent)
-      const moveStart = !(
-        this.oldTargetX >= this.targetX - this.idleThreshold &&
-        this.oldTargetX <= this.targetX + this.idleThreshold &&
-        this.oldTargetY >= this.targetY - this.idleThreshold &&
-        this.oldTargetY <= this.targetY + this.idleThreshold
-      );
+      // In chase mode, ANY recent cursor movement counts as "moving", however
+      // slow, so the cat only gets to wash/yawn/sleep once the cursor is at rest.
+      const cursorActive =
+        this.behaviorMode === BehaviorMode.CHASE_MOUSE &&
+        this.hasMouseMoved &&
+        performance.now() - (this.lastMouseMoveAt || 0) < 400;
+      const moveStart =
+        cursorActive ||
+        !(
+          this.oldTargetX >= this.targetX - this.idleThreshold &&
+          this.oldTargetX <= this.targetX + this.idleThreshold &&
+          this.oldTargetY >= this.targetY - this.idleThreshold &&
+          this.oldTargetY <= this.targetY + this.idleThreshold
+        );
 
       // State machine (matching original RunTowards switch)
       switch (this.state) {
@@ -609,7 +766,13 @@
           break;
 
         case NekoState.AWAKE:
-          if (this.stateCount >= AWAKE_TIME + Math.floor(Math.random() * 20)) {
+          // Chase mode: react right away (the original's long random "surprised"
+          // pause made the cat look like it was ignoring the cursor).
+          if (
+            this.behaviorMode === BehaviorMode.CHASE_MOUSE
+              ? this.stateCount >= 1
+              : this.stateCount >= AWAKE_TIME + Math.floor(Math.random() * 20)
+          ) {
             this.calcDirection(this.moveDX, this.moveDY);
           }
           break;
@@ -637,6 +800,21 @@
           // Clamp position
           newX = Math.max(0, Math.min(this.boundsWidth, newX));
           newY = Math.max(0, Math.min(this.boundsHeight, newY));
+
+          // Don't walk into avoid regions: slide along an edge, or stop
+          const avoid = this.avoid || [];
+          if (avoid.length && this.hitsAvoid(newX, newY, avoid)) {
+            if (!this.hitsAvoid(newX, this.logicY, avoid)) {
+              newY = this.logicY;
+            } else if (!this.hitsAvoid(this.logicX, newY, avoid)) {
+              newX = this.logicX;
+            } else {
+              newX = this.logicX;
+              newY = this.logicY;
+              this.setState(NekoState.STOP);
+              break;
+            }
+          }
           const notMoved = newX === this.logicX && newY === this.logicY;
 
           // Stop if we can't go further

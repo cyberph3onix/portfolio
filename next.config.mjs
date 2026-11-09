@@ -26,6 +26,17 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // The resume page embeds the PDF in an <object>, which needs the PDF to
+        // be frameable by our own origin (the global DENY above would block it).
+        source: "/:path*.pdf",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+        ],
+      },
     ];
   },
 };

@@ -1,16 +1,7 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
-import { ReactLight } from "@/components/ui/svgs/reactLight";
-import { NextjsIconDark } from "@/components/ui/svgs/nextjsIconDark";
-import { Typescript } from "@/components/ui/svgs/typescript";
-import { Nodejs } from "@/components/ui/svgs/nodejs";
-import { Python } from "@/components/ui/svgs/python";
-import { Golang } from "@/components/ui/svgs/golang";
-import { Postgresql } from "@/components/ui/svgs/postgresql";
-import { Docker } from "@/components/ui/svgs/docker";
-import { Kubernetes } from "@/components/ui/svgs/kubernetes";
-import { Java } from "@/components/ui/svgs/java";
-import { Csharp } from "@/components/ui/svgs/csharp";
+import { HomeIcon, FileTextIcon, NotebookIcon } from "lucide-react";
+
+export const RESUME_PDF = "/27octcv.pdf";
 
 export const DATA = {
   name: "Shreshta Raaj Gupta",
@@ -18,32 +9,46 @@ export const DATA = {
   url: "http://localhost:3000",
   location: "Kolkata, India",
   locationLink: "https://www.google.com/maps/place/kolkata",
+  tagline: "AI, Systems & Web3 Builder",
   description:
-    "I like to break and build stuff up, always trying to build something that matters, ai and web3 builder, 2x hack Ws",
+    "Computer Science student building AI, systems and Web3 products. 4x hackathon winner, researching post-quantum security at ISI Kolkata.",
   summary:
-    "Started my CS journey in 2024. Currently I'm pursuing a degree in computer science and engineering at Institute of engineering & Management, Kolkata. Building on web3 and AI projects in my free time. Always looking for new opportunities to learn and grow.",
+    "I'm a Computer Science and Engineering student at the [Institute of Engineering & Management, Kolkata](https://iem.edu.in/). I work across AI, systems and Web3: from hybrid RAG pipelines and voice assistants to zero-knowledge credentials and non-custodial smart wallets on Stellar. Right now I'm a research intern at the Indian Statistical Institute, working on making 5G authentication quantum-safe for constrained IoT devices. Outside research, I'm a Stellar Ambassador and the Tech Lead at GDG IEM. I've won four hackathons and I'm always looking for something new to build.",
   avatarUrl: "/me.png",
   skills: [
-    { name: "Python", icon: Python },
-    { name: "Next.js", icon: NextjsIconDark },
-    { name: "TypeScript", icon: Typescript },
-    { name: "Node.js", icon: Nodejs },
-    { name: "Go", icon: Golang },
-    { name: "React", icon: ReactLight },
-    { name: "Postgres", icon: Postgresql },
-    { name: "Docker", icon: Docker },
-    { name: "Kubernetes", icon: Kubernetes },
-    { name: "Java", icon: Java },
-    { name: "C++", icon: Csharp },
-    { name: "Solidity", logoUrl: "/solidity.png" },
-    { name: "PyTorch", logoUrl: "/pytorch.png" },
-    { name: "MongoDB", logoUrl: "/mongodb.png" },
-    { name: "Tailwind CSS", logoUrl: "/tailwindcss.png" },
-    { name: "Redis", logoUrl: "/redis.png" },
+    {
+      category: "Languages",
+      items: ["Python", "TypeScript", "Rust", "Java", "C++", "Solidity"],
+    },
+    {
+      category: "AI / ML",
+      items: [
+        "Machine Learning",
+        "RAG",
+        "Information Retrieval",
+        "LLM Applications",
+        "Zero-Knowledge Proofs",
+        "FAISS",
+        "BM25",
+        "LangChain",
+        "ChromaDB",
+        "scikit-learn",
+        "FastF1",
+      ],
+    },
+    {
+      category: "Web / Backend",
+      items: ["React", "Next.js", "Node.js", "FastAPI"],
+    },
+    {
+      category: "Web3 & Tools",
+      items: ["Soroban", "Smart Contracts", "Docker", "Git", "Linux"],
+    },
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
     { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    { href: "/resume", icon: FileTextIcon, label: "Resume" },
   ],
   contact: {
     email: "guptaraaj0505@gmail.com",
@@ -55,19 +60,16 @@ export const DATA = {
         icon: Icons.github,
         navbar: true,
       },
-
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://dub.sh/YfA37aP",
+        url: "https://www.linkedin.com/in/shreshta-raaj-gupta",
         icon: Icons.linkedin,
-
         navbar: true,
       },
       X: {
         name: "X",
         url: "https://dub.sh/Qp4vDYc",
         icon: Icons.x,
-
         navbar: true,
       },
       Youtube: {
@@ -80,7 +82,6 @@ export const DATA = {
         name: "Send Email",
         url: "mailto:guptaraaj0505@gmail.com",
         icon: Icons.email,
-
         navbar: true,
       },
     },
@@ -88,76 +89,44 @@ export const DATA = {
 
   work: [
     {
-      company: "Atomic Finance",
-      href: "https://atomic.finance",
-      badges: [],
+      company: "GDG IEM",
+      location: "Kolkata",
+      title: "Tech Lead",
+      logoUrl: "/logos/gdg-iem.webp",
+      start: "",
+      end: "Present",
+    },
+    {
+      company: "Stellar Development Foundation",
+      location: "Kolkata",
+      title: "Stellar Ambassador",
+      logoUrl: "/logos/stellar.png",
+      start: "",
+      end: "Present",
+    },
+    {
+      company: "Indian Statistical Institute (ISI), Kolkata",
+      location: "Kolkata",
+      title: "Research Intern, Post-Quantum 5G Authentication",
+      logoUrl: "/logos/isi-kolkata.webp",
+      start: "2026",
+      end: "Present",
+    },
+    {
+      company: "IEEE EMBS Pune Chapter",
       location: "Remote",
-      title: "Bitcoin Protocol Engineer",
-      logoUrl: "/atomic.png",
-      start: "May 2021",
-      end: "Oct 2022",
-      description:
-        "Implemented the Bitcoin discreet log contract (DLC) protocol specifications as an open source Typescript SDK. Dockerized all microservices and setup production kubernetes cluster. Architected a data lake using AWS S3 and Athena for historical backtesting of bitcoin trading strategies. Built a mobile app using react native and typescript.",
+      title: "AI/ML Intern, Smart Pharmacy Inventory Prediction",
+      logoUrl: "/logos/ieee-embs-pune.webp",
+      start: "June 2026",
+      end: "July 2026",
     },
     {
-      company: "Shopify",
-      badges: [],
-      href: "https://shopify.com",
-      location: "Remote",
-      title: "Software Engineer",
-      logoUrl: "/shopify.svg",
-      start: "January 2021",
-      end: "April 2021",
-      description:
-        "Implemented a custom Kubernetes controller in Go to automate the deployment of MySQL and ProxySQL custom resources in order to enable 2,000+ internal developers to instantly deploy their app databases to production. Wrote several scripts in Go to automate MySQL database failovers while maintaining master-slave replication topologies and keeping Zookeeper nodes consistent with changes.",
-    },
-    {
-      company: "Nvidia",
-      href: "https://nvidia.com/",
-      badges: [],
-      location: "Santa Clara, CA",
-      title: "Software Engineer",
-      logoUrl: "/nvidia.png",
-      start: "January 2020",
-      end: "April 2020",
-      description:
-        "Architected and wrote the entire MVP of the GeForce Now Cloud Gaming internal admin and A/B testing dashboard using React, Redux, TypeScript, and Python.",
-    },
-    {
-      company: "Splunk",
-      href: "https://splunk.com",
-      badges: [],
-      location: "San Jose, CA",
-      title: "Software Engineer",
-      logoUrl: "/splunk.svg",
-      start: "January 2019",
-      end: "April 2019",
-      description:
-        "Co-developed a prototype iOS app with another intern in Swift for the new Splunk Phantom security orchestration product (later publicly demoed and launched at .conf annual conference in Las Vegas). Implemented a realtime service for the iOS app in Django (Python) and C++; serialized data using protobufs transmitted over gRPC resulting in an approximate 500% increase in data throughput.",
-    },
-    {
-      company: "Lime",
-      href: "https://li.me/",
-      badges: [],
-      location: "San Francisco, CA",
-      title: "Software Engineer",
-      logoUrl: "/lime.svg",
-      start: "January 2018",
-      end: "April 2018",
-      description:
-        "Proposed and implemented an internal ruby API for sending/receiving commands to scooters over LTE networks. Developed a fully automated bike firmware update system to handle asynchronous firmware updates of over 100,000+ scooters worldwide, and provide progress reports in real-time using React, Ruby on Rails, PostgreSQL and AWS EC2 saving hundreds of developer hours.",
-    },
-    {
-      company: "Mitre Media",
-      href: "https://mitremedia.com/",
-      badges: [],
-      location: "Toronto, ON",
-      title: "Software Engineer",
-      logoUrl: "/mitremedia.png",
-      start: "May 2017",
-      end: "August 2017",
-      description:
-        "Designed and implemented a robust password encryption and browser cookie storage system in Ruby on Rails. Leveraged the Yahoo finance API to develop the dividend.com equity screener",
+      company: "Ambrosia Restaurant (Family Business)",
+      location: "Baranagar, Kolkata",
+      title: "IT and Operations Assistant",
+      logoUrl: "",
+      start: "June 2017",
+      end: "Present",
     },
   ],
   education: [
@@ -166,34 +135,35 @@ export const DATA = {
       href: "https://iem.edu.in/",
       degree: "B.Tech in Computer Science and Engineering",
       logoUrl: "/iem_logo.jpg",
-      start: "July 2024",
+      start: "2024",
       end: "2028",
     },
     {
-      school: "St.Xavier's Institution",
+      school: "St. Xavier's Institution, Panihati",
       href: "https://sxipanihati.org/sxip/",
-      degree: "Higher Secondary Education (CISCE)",
+      degree: "Higher Secondary Education (CISCE) · Sodepur",
       logoUrl: "/sxi_logo.jpg",
-      start: "2016",
-      end: "2021",
+      start: "",
+      end: "2024",
     },
   ],
   projects: [
     {
+      slug: "kairos",
       title: "Kairos",
+      subtitle: "Intent-Based Non-Custodial Capital Delegation",
       href: "https://kairos.x7710.xyz/",
-      dates: "June 2026 - Present",
+      dates: "July 2026 - August 2026",
       active: true,
       description:
-        "Intent-based, non-custodial capital delegation on Stellar Soroban where AI proposes and on-chain policies dispose. Deploy a personal Smart Wallet, grant scoped and revocable delegations, and execute trades enforced strictly by on-chain policies.",
-      technologies: [
-        "Next.js",
-        "TypeScript",
-        "Soroban",
-        "Rust",
-        "Stellar",
-        "TailwindCSS",
+        "Intent-based, non-custodial capital delegation on Stellar Soroban where AI proposes and on-chain policies dispose. Scoped, revocable delegations keep funds under user custody.",
+      bullets: [
+        "Built a non-custodial delegation system where an AI reasoning engine proposes trades while on-chain policies enforce spend limits, asset whitelists and time windows.",
+        "Designed a Soroban smart-wallet architecture with scoped, revocable delegations so funds remain under user custody.",
+        "Implemented a deterministic Market → Context → Memory → Strategy → Reasoning → Verification → Execution pipeline with only one LLM-dependent stage.",
+        "Shipped deployed Soroban contracts, a TypeScript SDK, Next.js dashboard and Node/Express backend with wallet-signature authentication.",
       ],
+      technologies: ["TypeScript", "Rust", "Soroban", "Next.js", "Node.js"],
       links: [
         {
           type: "Website",
@@ -208,50 +178,55 @@ export const DATA = {
       ],
       image: "/kairos.png",
       imageClassName: "object-contain bg-black",
-      video: "",
     },
     {
-      title: "Formula-1 race predictor",
-      href: "https://github.com/cyberph3onix/ProjectF1",
-      dates: "Jan 2024 - Present",
+      slug: "doodle",
+      title: "Doodle",
+      subtitle: "On-chain freelance marketplace · Hexafalls (MLH × Solana)",
+      href: "https://github.com/wolf1276/doodle-hexafalls",
+      dates: "2026",
       active: true,
       description:
-        "ProjectF1 is a data-driven machine learning pipeline built to predict Formula 1 race results. By analyzing historical qualifying performance, car telemetry, and track conditions, the model attempts to forecast the final race classification before the lights go out.",
-      technologies: [
-        "python",
-        "fastapi",
-        "pandas",
-        "scikit-learn",
-        "xgboost",
+        "A non-custodial, milestone-based freelance payment protocol on Solana with escrow vaults and a recomputable on-chain reputation score. Built as a team at Hexafalls, where it won the MLH × Solana track and placed 3rd overall.",
+      bullets: [
+        "Freelance platforms hold client funds, take large fees and own each freelancer's reputation. Doodle holds funds in program-derived vaults with no private key and releases them by milestone under fixed on-chain rules.",
+        "Clients and creators agree on milestones, fund an escrow vault, and release payment on-chain as each milestone is delivered.",
+        "Reputation is derived deterministically from on-chain history that anyone can recompute.",
+        "Won the MLH × Solana track and placed 3rd overall at Hexafalls.",
       ],
+      technologies: ["Solana", "Anchor", "Rust", "Next.js"],
       links: [
         {
           type: "Source",
-          href: "https://github.com/cyberph3onix/ProjectF1",
+          href: "https://github.com/wolf1276/doodle-hexafalls",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "https://media.formula1.com/image/upload/t_16by9Centre/c_fit,w_3200,h_1800/q_auto/v1740000001/fom-website/2026/Red%20Bull/SI202601150722.webp",
-      video:
-        "",
+      image: "/projects/doodle-banner.webp",
     },
     {
+      slug: "jigyasa",
       title: "Jigyasa",
+      subtitle: "Voice-Enabled Hindi RAG Assistant",
       href: "https://hhgoa-ragtask.vercel.app/",
-      dates: "Aug 2026 - Present",
+      dates: "August 2026",
       active: true,
       description:
-        "A voice-first Hindi RAG assistant built on the MS MARCO-XI corpus using hybrid dense (FAISS HNSW) and sparse (BM25) retrieval with cross-encoder reranking and strict grounding guardrails.",
+        "A voice-first Hindi RAG assistant over the ~7.77M-passage MS MARCO-XI corpus using hybrid dense (FAISS HNSW) and sparse (BM25) retrieval with cross-encoder reranking and strict grounding guardrails.",
+      bullets: [
+        "Built a voice-first Hindi RAG assistant over a ~7.77M-passage MS MARCO-XI corpus using Sarvam STT, hybrid dense+sparse retrieval, cross-encoder reranking and grounded generation.",
+        "Designed four length-routed chunking strategies, FAISS HNSW + BM25 retrieval with Reciprocal Rank Fusion, and an explicit abstention path for unsupported questions.",
+        "Evaluated on 1,000 held-out queries with Recall@10 of 0.637, NDCG@10 of 0.465 and MRR of 0.259; guardrails produced 0 false positives across 1,000 in-domain queries and 0 false negatives across 16 off-topic/unsafe cases.",
+        "Optimized and benchmarked the local pipeline at P50/P70/P100 latencies of 114.0/122.6/142.5 ms; a controlled K=10 configuration reduced latency by 44–48% without observed quality loss.",
+      ],
       technologies: [
         "Python",
         "FastAPI",
         "FAISS",
         "BM25",
-        "RAG",
-        "Next.js",
-        "TypeScript",
+        "Cross-Encoder",
+        "Sarvam",
         "Gemini",
-        "Sarvam STT",
       ],
       links: [
         {
@@ -266,46 +241,21 @@ export const DATA = {
         },
       ],
       image: "/jigyasa.png",
-      video: "",
     },
     {
-      title: "Ragged",
-      href: "https://github.com/cyberph3onix/ragged",
-      dates: "June 2026 - Present",
-      active: true,
-      description:
-        "Talk to your Data through this Retrieval-Augmented Generation (RAG) system that works both online and offline(for extra privacy). It uses a custom vector database built on top of SQLite and supports multiple embedding and LLM providers.",
-      technologies: [
-        "python",
-        "sqlite",
-        "RAG",
-        "LLMs",
-        "vector databases",
-      ],
-      links: [
-
-        {
-          type: "Source",
-          href: "https://github.com/magicuidesign/magicui",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/workinprogress.png",
-      video: "",
-    },
-    {
-      title: "Collusion resistant ZKP",
+      slug: "crcs",
+      title: "CRCS",
+      subtitle: "Collusion-Resistant Credential System",
       href: "https://github.com/cyberph3onix/crcs-zkp",
-      dates: "2025",
+      dates: "2026",
       active: true,
       description:
-        "Developed a collusion-resistant zero-knowledge proof system for secure and private identity verification. ",
-      technologies: [
-        "Rust",
-        "zkSNARKs",
-        "cryptography",
-        "zero-knowledge proofs",
+        "A zero-knowledge credential system enabling selective disclosure of attributes without revealing the underlying data, with proofs that can't be linked across verifiers.",
+      bullets: [
+        "Contributed to a zero-knowledge credential system enabling selective disclosure of attributes without revealing underlying data.",
+        "Used Poseidon commitments and Circom/Groth16 circuits to prevent verifiers from colluding to link separate proofs to the same credential holder.",
       ],
+      technologies: ["Circom", "Groth16", "Poseidon", "Zero-Knowledge Proofs"],
       links: [
         {
           type: "Source",
@@ -313,72 +263,151 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/workinprogress.png",
-      video: "",
+      image: "/projects/crcs-zkp.png",
     },
-    // {
-    //   title: "Automatic Chat",
-    //   href: "https://automatic.chat",
-    //   dates: "April 2023 - March 2024",
-    //   active: true,
-    //   description:
-    //     "Developed an AI Customer Support Chatbot which automatically responds to customer support tickets using the latest GPT models.",
-    //   technologies: [
-    //     "Next.js",
-    //     "Typescript",
-    //     "PostgreSQL",
-    //     "Prisma",
-    //     "TailwindCSS",
-    //     "Shadcn UI",
-    //     "Magic UI",
-    //     "Stripe",
-    //     "Cloudflare Workers",
-    //   ],
-    //   links: [
-    //     {
-    //       type: "Website",
-    //       href: "https://automatic.chat",
-    //       icon: <Icons.globe className="size-3" />,
-    //     },
-    //   ],
-    //   image: "",
-    //   video:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
-    // },
+    {
+      slug: "ragged",
+      title: "Ragged",
+      subtitle: "Hybrid Retrieval-Augmented Generation Framework",
+      href: "https://github.com/cyberph3onix/ragged",
+      dates: "June 2026 - Present",
+      active: true,
+      description:
+        "A modular RAG framework that works online and offline: BM25 + dense retrieval fused with Reciprocal Rank Fusion, cross-encoder reranking, and a provider-agnostic LLM layer.",
+      bullets: [
+        "Built a modular RAG framework combining BM25 sparse retrieval and dense vector search through Reciprocal Rank Fusion with cross-encoder reranking.",
+        "Added RAGAS-based evaluation for faithfulness, relevancy and correctness, with quality gates integrated into CI.",
+        "Designed a provider-agnostic LLM layer supporting local Ollama models and cloud providers without application-level changes.",
+      ],
+      technologies: ["Python", "LangChain", "ChromaDB", "BM25", "Ollama", "Groq"],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/cyberph3onix/ragged",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/projects/ragged.png",
+    },
+    {
+      slug: "f1-race-prediction",
+      title: "F1 Race Outcome Prediction",
+      subtitle: "Pre-race machine learning pipeline",
+      href: "https://github.com/cyberph3onix/ProjectF1",
+      dates: "December 2025 - Present",
+      active: true,
+      description:
+        "An ML pipeline that predicts Formula 1 race classification using only pre-race features, with strict prevention of data leakage.",
+      bullets: [
+        "Built an ML pipeline predicting F1 race classification using only pre-race features such as grid position, qualifying delta and constructor strength, with strict prevention of data leakage.",
+      ],
+      technologies: ["Python", "pandas", "scikit-learn", "FastF1"],
+      links: [
+        {
+          type: "Source",
+          href: "https://github.com/cyberph3onix/ProjectF1",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image:
+        "https://media.formula1.com/image/upload/t_16by9Centre/c_fit,w_3200,h_1800/q_auto/v1740000001/fom-website/2026/Red%20Bull/SI202601150722.webp",
+    },
+    {
+      slug: "injective-token-sender",
+      title: "Injective Token Sender",
+      subtitle: "Keplr-powered INJ transfers on Injective Testnet",
+      href: "https://injective-token-sender.vercel.app",
+      dates: "2026",
+      active: true,
+      description:
+        "A deliberately small Next.js dApp that connects a Keplr wallet, reads your INJ balance on Injective Testnet and sends INJ to another address. Built for the HackQuest India × Injective Co-Learning Camp #22.",
+      bullets: [
+        "Connects to Keplr on injective-888, shows the wallet address and the native INJ balance converted from base units.",
+        "Builds a MsgSend, has Keplr sign it, broadcasts it and shows the transaction hash with an explorer link.",
+        "No backend, database or authentication: the browser talks to a public Injective LCD node and the app never sees a private key.",
+      ],
+      technologies: ["TypeScript", "Next.js", "Injective SDK", "Keplr", "Cosmos SDK"],
+      links: [
+        {
+          type: "Website",
+          href: "https://injective-token-sender.vercel.app",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/cyberph3onix/injective-token-sender",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/projects/injective-token-sender.png",
+    },
   ],
-  hackathons: [
+  achievements: [
+    {
+      title: "Hexafalls (MLH × Solana)",
+      dates: "2026",
+      location: "",
+      description:
+        "Solana Track Winner and 3rd Runner-up overall, with Doodle, an on-chain freelance marketplace with milestone escrow.",
+      image: "/logos/hexafalls.webp",
+      links: [
+        {
+          title: "Doodle",
+          icon: <Icons.github className="h-4 w-4" />,
+          href: "https://github.com/wolf1276/doodle-hexafalls",
+        },
+      ],
+    },
     {
       title: "ISEA 2026 Hackathon",
-      dates: "March 10th",
+      dates: "March 2026",
       location: "Indian Statistical Institute, Kolkata",
       description:
-        "Developed a collusion resistant zero-knowledge proof system for secure and private identity verification.",
-      image:
-        "https://www.isical.ac.in/isical_web/images/logo.png",
-      mlh: "",
+        "Winner. Built CRCS, a collusion-resistant zero-knowledge credential system for private identity verification.",
+      image: "/logos/isea.webp",
       links: [],
     },
     {
       title: "Converge Ideathon",
-      dates: "March 8th 2026",
+      dates: "March 2026",
       location: "Kolkata, India",
       description:
-        "Zero knowledge proof based verification system for secure and private identity confirmation.",
-      image:
-        "",
-      links: [
-      ],
+        "Winner. Zero-knowledge proof based verification system for secure and private identity confirmation.",
+      image: "/logos/converge.webp",
+      links: [],
+    },
+    {
+      title: "TCS TechDays Hackathon",
+      dates: "September 28th, 2026",
+      location: "",
+      description: "Winner, Cybersecurity Track.",
+      image: "/logos/tcs-techdays.webp",
+      links: [],
+    },
+    {
+      title: "Stellar Ambassador",
+      dates: "Present",
+      location: "Stellar Development Foundation",
+      description: "Ambassador for the Stellar developer ecosystem.",
+      image: "/logos/stellar.png",
+      links: [],
+    },
+    {
+      title: "Stellar Inner Circle",
+      dates: "2026",
+      location: "Stellar Buildstation, Kolkata",
+      description: "Selected participant in the Stellar Inner Circle.",
+      image: "/logos/stellar.png",
+      links: [],
     },
     {
       title: "Smart Make-a-thon",
       dates: "September 6th - 7th, 2025",
       location: "Kolkata, India",
       description:
-        "Developed an extension that automatically detects ai generated content on the web and provides a confidence score to users. works locally on the browser for extra privacy.",
+        "Built a browser extension that detects AI-generated content on the web and gives a confidence score. It runs locally in the browser for extra privacy.",
       image:
         "https://smf-smart-makeathon.devfolio.co/_next/image?url=https%3A%2F%2Fassets.devfolio.co%2Fhackathons%2Fe4b801dae041434e9656a41101a48550%2Fassets%2Ffavicon%2F873.jpeg&w=1024&q=75",
-      win: "",
-      mlh: "", 
       links: [
         {
           title: "Devfolio",
@@ -387,306 +416,5 @@ export const DATA = {
         },
       ],
     },
-    // {
-    //   title: "ETH Waterloo",
-    //   dates: "October 13th - 15th, 2017",
-    //   location: "Waterloo, Ontario",
-    //   description:
-    //     "Developed a blockchain application for doctors and pharmacists to perform trustless transactions and prevent overdosage in patients.",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/eth-waterloo.png",
-    //   links: [
-    //     {
-    //       title: "Organization",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/ethdocnet",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Hack The North",
-    //   dates: "September 15th - 17th, 2017",
-    //   location: "Waterloo, Ontario",
-    //   description:
-    //     "Developed a virtual reality application allowing users to see themselves in third person.",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/hack-the-north.png",
-    //   mlh: "https://s3.amazonaws.com/logged-assets/trust-badge/2017/white.svg",
-    //   links: [
-    //     {
-    //       title: "Streamer Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/justinmichaud/htn2017",
-    //     },
-    //     {
-    //       title: "Client Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/dillionverma/RTSPClient",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Hack The 6ix",
-    //   dates: "August 26th - 27th, 2017",
-    //   location: "Toronto, Ontario",
-    //   description:
-    //     "Developed an open platform for people shipping items to same place to combine shipping costs and save money.",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/hack-the-6ix.jpg",
-    //   mlh: "https://s3.amazonaws.com/logged-assets/trust-badge/2017/white.svg",
-    //   links: [
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/ShareShip/ShareShip",
-    //     },
-    //     {
-    //       title: "Site",
-    //       icon: <Icons.globe className="h-4 w-4" />,
-    //       href: "https://share-ship.herokuapp.com/",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Stupid Hack Toronto",
-    //   dates: "July 23rd, 2017",
-    //   location: "Toronto, Ontario",
-    //   description:
-    //     "Developed a chrome extension which tracks which facebook profiles you have visited and immediately texts your girlfriend if you visited another girls page.",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/stupid-hackathon.png",
-    //   links: [
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/nsagirlfriend/nsagirlfriend",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Global AI Hackathon - Toronto",
-    //   dates: "June 23rd - 25th, 2017",
-    //   location: "Toronto, Ontario",
-    //   description:
-    //     "Developed a python library which can be imported to any python game and change difficulty of the game based on real time emotion of player. Uses OpenCV and webcam for facial recognition, and a custom Machine Learning Model trained on a [Kaggle Emotion Dataset](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/leaderboard) using [Tensorflow](https://www.tensorflow.org/Tensorflow) and [Keras](https://keras.io/). This project recieved 1st place prize at the Global AI Hackathon - Toronto and was also invited to demo at [NextAI Canada](https://www.nextcanada.com/next-ai).",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/global-ai-hackathon.jpg",
-    //   win: "1st Place Winner",
-    //   links: [
-    //     {
-    //       title: "Article",
-    //       icon: <Icons.globe className="h-4 w-4" />,
-    //       href: "https://syncedreview.com/2017/06/26/global-ai-hackathon-in-toronto/",
-    //     },
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/TinySamosas/",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "McGill AI for Social Innovation Hackathon",
-    //   dates: "June 17th - 18th, 2017",
-    //   location: "Montreal, Quebec",
-    //   description:
-    //     "Developed realtime facial microexpression analyzer using AI",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/ai-for-social-good.jpg",
-    //   links: [],
-    // },
-    // {
-    //   title: "Open Source Circular Economy Days Hackathon",
-    //   dates: "June 10th, 2017",
-    //   location: "Toronto, Ontario",
-    //   description:
-    //     "Developed a custom admin interface for food waste startup <a href='http://genecis.co/'>Genecis</a> to manage their data and provide analytics.",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/open-source-circular-economy-days.jpg",
-    //   win: "1st Place Winner",
-    //   links: [
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/dillionverma/genecis",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Make School's Student App Competition 2017",
-    //   dates: "May 19th - 21st, 2017",
-    //   location: "International",
-    //   description: "Improved PocketDoc and submitted to online competition",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/make-school-hackathon.png",
-    //   win: "Top 10 Finalist | Honourable Mention",
-    //   links: [
-    //     {
-    //       title: "Medium Article",
-    //       icon: <Icons.globe className="h-4 w-4" />,
-    //       href: "https://medium.com/make-school/the-winners-of-make-schools-student-app-competition-2017-a6b0e72f190a",
-    //     },
-    //     {
-    //       title: "Devpost",
-    //       icon: <Icons.globe className="h-4 w-4" />,
-    //       href: "https://devpost.com/software/pocketdoc-react-native",
-    //     },
-    //     {
-    //       title: "YouTube",
-    //       icon: <Icons.youtube className="h-4 w-4" />,
-    //       href: "https://www.youtube.com/watch?v=XwFdn5Rmx68",
-    //     },
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/dillionverma/pocketdoc-react-native",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "HackMining",
-    //   dates: "May 12th - 14th, 2017",
-    //   location: "Toronto, Ontario",
-    //   description: "Developed neural network to optimize a mining process",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/hack-mining.png",
-    //   links: [],
-    // },
-    // {
-    //   title: "Waterloo Equithon",
-    //   dates: "May 5th - 7th, 2017",
-    //   location: "Waterloo, Ontario",
-    //   description:
-    //     "Developed Pocketdoc, an app in which you take a picture of a physical wound, and the app returns common solutions or cures to the injuries or diseases.",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/waterloo-equithon.png",
-    //   links: [
-    //     {
-    //       title: "Devpost",
-    //       icon: <Icons.globe className="h-4 w-4" />,
-    //       href: "https://devpost.com/software/pocketdoc-react-native",
-    //     },
-    //     {
-    //       title: "YouTube",
-    //       icon: <Icons.youtube className="h-4 w-4" />,
-    //       href: "https://www.youtube.com/watch?v=XwFdn5Rmx68",
-    //     },
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/dillionverma/pocketdoc-react-native",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "SpaceApps Waterloo",
-    //   dates: "April 28th - 30th, 2017",
-    //   location: "Waterloo, Ontario",
-    //   description:
-    //     "Developed Earthwatch, a web application which allows users in a plane to virtually see important points of interest about the world below them. They can even choose to fly away from their route and then fly back if they choose. Special thanks to CesiumJS for providing open source world and plane models.",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/space-apps.png",
-    //   links: [
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/dillionverma/earthwatch",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "MHacks 9",
-    //   dates: "March 24th - 26th, 2017",
-    //   location: "Ann Arbor, Michigan",
-    //   description:
-    //     "Developed Super Graphic Air Traffic, a VR website made to introduce people to the world of air traffic controlling. This project was built completely using THREE.js as well as a node backend server.",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/mhacks-9.png",
-    //   mlh: "https://s3.amazonaws.com/logged-assets/trust-badge/2017/white.svg",
-    //   links: [
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/dillionverma/threejs-planes",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "StartHacks I",
-    //   dates: "March 4th - 5th, 2017",
-    //   location: "Waterloo, Ontario",
-    //   description:
-    //     "Developed at StartHacks 2017, Recipic is a mobile app which allows you to take pictures of ingredients around your house, and it will recognize those ingredients using ClarifAI image recognition API and return possible recipes to make. Recipic recieved 1st place at the hackathon for best pitch and hack.",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/starthacks.png",
-    //   win: "1st Place Winner",
-    //   mlh: "https://s3.amazonaws.com/logged-assets/trust-badge/2017/white.svg",
-    //   links: [
-    //     {
-    //       title: "Source (Mobile)",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/mattBlackDesign/recipic-ionic",
-    //     },
-    //     {
-    //       title: "Source (Server)",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/mattBlackDesign/recipic-rails",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "QHacks II",
-    //   dates: "February 3rd - 5th, 2017",
-    //   location: "Kingston, Ontario",
-    //   description:
-    //     "Developed a mobile game which enables city-wide manhunt with random lobbies",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/qhacks.png",
-    //   mlh: "https://s3.amazonaws.com/logged-assets/trust-badge/2017/white.svg",
-    //   links: [
-    //     {
-    //       title: "Source (Mobile)",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/dillionverma/human-huntr-react-native",
-    //     },
-    //     {
-    //       title: "Source (API)",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/mattBlackDesign/human-huntr-rails",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Terrible Hacks V",
-    //   dates: "November 26th, 2016",
-    //   location: "Waterloo, Ontario",
-    //   description:
-    //     "Developed a mock of Windows 11 with interesting notifications and functionality",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/terrible-hacks-v.png",
-    //   links: [
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/justinmichaud/TerribleHacks2016-Windows11",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Portal Hackathon",
-    //   dates: "October 29, 2016",
-    //   location: "Kingston, Ontario",
-    //   description:
-    //     "Developed an internal widget for uploading assignments using Waterloo's portal app",
-    //   image:
-    //     "https://pub-83c5db439b40468498f97946200806f7.r2.dev/hackline/portal-hackathon.png",
-    //   links: [
-    //     {
-    //       title: "Source",
-    //       icon: <Icons.github className="h-4 w-4" />,
-    //       href: "https://github.com/UWPortalSDK/crowmark",
-    //     },
-    //   ],
-    // },
   ],
 } as const;

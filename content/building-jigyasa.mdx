@@ -1,0 +1,30 @@
+---
+title: "Building Jigyasa, a voice-first Hindi RAG assistant"
+publishedAt: "2026-11-06"
+summary: "What I learned building a Hindi RAG assistant over 7.77M passages: hybrid retrieval, reranking, grounding guardrails and latency."
+---
+
+Jigyasa is a voice-first assistant that answers questions in Hindi over the MS MARCO-XI corpus, about 7.77 million passages. You speak, Sarvam STT transcribes, and the answer comes back grounded in retrieved text.
+
+## Retrieval
+
+Dense search alone missed exact-term matches, and BM25 alone missed paraphrases, so I combined them:
+
+- FAISS HNSW for dense retrieval
+- BM25 for sparse retrieval
+- Reciprocal Rank Fusion to merge the two ranked lists
+- A cross-encoder to rerank the fused results
+
+I also wrote four length-routed chunking strategies, so short and long passages aren't chunked the same way.
+
+## Knowing when not to answer
+
+The assistant has an explicit abstention path for questions the corpus can't support. On 1,000 in-domain queries it produced 0 false positives, and across 16 off-topic or unsafe cases it produced 0 false negatives.
+
+## Numbers
+
+On 1,000 held-out queries: Recall@10 of 0.637, NDCG@10 of 0.465 and MRR of 0.259.
+
+The local pipeline runs at P50/P70/P100 latencies of 114.0 / 122.6 / 142.5 ms. Dropping to K=10 cut latency by 44-48% with no quality loss I could observe.
+
+Source: [github.com/cyberph3onix/hhgoa_ragtask](https://github.com/cyberph3onix/hhgoa_ragtask)

@@ -8,7 +8,10 @@ import Markdown from "react-markdown";
 import GitHubActivitySection from "@/components/section/github-activity-section";
 import HackathonsSection from "@/components/section/hackathons-section";
 import ProjectsSection from "@/components/section/projects-section";
-// import WorkSection from "@/components/section/work-section";
+import WorkSection from "@/components/section/work-section";
+import LeetCodeSection from "@/components/section/leetcode-section";
+import GallerySection from "@/components/section/gallery-section";
+import ContactSection from "@/components/section/contact-section";
 import { ArrowUpRight } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
@@ -31,6 +34,16 @@ export default function Page() {
                 delay={BLUR_FADE_DELAY}
                 text={DATA.description}
               />
+              <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  <Link
+                    href="/resume"
+                    className="rounded-xl bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                  >
+                    View Resume
+                  </Link>
+                </div>
+              </BlurFade>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
               <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted">
@@ -55,9 +68,7 @@ export default function Page() {
           </BlurFade>
         </div>
       </section>
-      {/* Work experience section hidden for now.
-          To restore it later, uncomment this block and the WorkSection import above. */}
-      {/* <section id="work">
+      <section id="work">
         <div className="flex min-h-0 flex-col gap-y-6">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
             <h2 className="text-xl font-bold">Work Experience</h2>
@@ -66,7 +77,7 @@ export default function Page() {
             <WorkSection />
           </BlurFade>
         </div>
-      </section> */}
+      </section>
       <section id="education">
         <div className="flex min-h-0 flex-col gap-y-6">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
@@ -106,7 +117,7 @@ export default function Page() {
                   </div>
                   <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
                     <span>
-                      {education.start} - {education.end}
+                      {[education.start, education.end].filter(Boolean).join(" - ")}
                     </span>
                   </div>
                 </Link>
@@ -120,16 +131,23 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
             <h2 className="text-xl font-bold">Skills</h2>
           </BlurFade>
-          <div className="flex flex-wrap gap-2">
-            {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <div className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center gap-2">
-                  {"icon" in skill && skill.icon ? (
-                    <skill.icon className="size-4 rounded overflow-hidden object-contain" />
-                  ) : "logoUrl" in skill && skill.logoUrl ? (
-                    <img src={skill.logoUrl} alt={skill.name} className="size-4 rounded overflow-hidden object-contain" />
-                  ) : null}
-                  <span className="text-foreground text-sm font-medium">{skill.name}</span>
+          <div className="flex flex-col gap-4">
+            {DATA.skills.map((group, gi) => (
+              <BlurFade key={group.category} delay={BLUR_FADE_DELAY * 10 + gi * 0.05}>
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-sm font-semibold text-muted-foreground">
+                    {group.category}
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <div
+                        key={item}
+                        className="border bg-background border-border ring-2 ring-border/20 rounded-xl h-8 w-fit px-4 flex items-center"
+                      >
+                        <span className="text-foreground text-sm font-medium">{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </BlurFade>
             ))}
@@ -139,6 +157,9 @@ export default function Page() {
       <BlurFade delay={BLUR_FADE_DELAY * 11}>
         <GitHubActivitySection />
       </BlurFade>
+      <BlurFade delay={BLUR_FADE_DELAY * 11.5}>
+        <LeetCodeSection />
+      </BlurFade>
       <section id="projects">
         <BlurFade delay={BLUR_FADE_DELAY * 12}>
           <ProjectsSection />
@@ -147,6 +168,12 @@ export default function Page() {
       <section id="hackathons">
         <BlurFade delay={BLUR_FADE_DELAY * 14}>
           <HackathonsSection />
+        </BlurFade>
+      </section>
+      <GallerySection />
+      <section id="contact">
+        <BlurFade delay={BLUR_FADE_DELAY * 16}>
+          <ContactSection />
         </BlurFade>
       </section>
     </main>

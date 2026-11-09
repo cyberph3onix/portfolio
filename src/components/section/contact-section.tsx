@@ -24,18 +24,36 @@ export default function ContactSection() {
           Get in Touch
         </h2>
         <p className="mx-auto max-w-lg text-muted-foreground text-balance">
-          Want to chat? Just shoot me a dm{" "}
-          <Link
-            href={DATA.contact.social.X.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-          >
-            with a direct question on twitter
-          </Link>{" "}
-          and I&apos;ll respond whenever I can. I will ignore all
-          soliciting.
+          Have a project, an internship or a research idea in mind? Send me an
+          email and I&apos;ll get back to you as soon as I can.
         </p>
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <Link
+            href={`mailto:${DATA.contact.email}`}
+            className="rounded-xl bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            Send an Email
+          </Link>
+          <Link
+            href="/resume"
+            className="rounded-xl border bg-background px-4 py-1.5 text-sm font-medium hover:bg-muted transition-colors"
+          >
+            View Resume
+          </Link>
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
+          {(["GitHub", "LinkedIn", "X"] as const).map((k) => (
+            <Link
+              key={k}
+              href={DATA.contact.social[k].url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              {k}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

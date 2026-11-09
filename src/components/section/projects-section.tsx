@@ -25,8 +25,8 @@ export default function ProjectsSection() {
                     <div className="flex flex-col gap-y-3 items-center justify-center">
                         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Check out my latest work</h2>
                         <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
-                            I&apos;ve worked on a variety of projects. Here are a few of my
-                            favorites.
+                            AI, systems and Web3, from retrieval pipelines to on-chain
+                            policy engines. Click a project for the full write-up.
                         </p>
                     </div>
                 </div>
@@ -38,7 +38,7 @@ export default function ProjectsSection() {
                             className="h-full"
                         >
                             <ProjectCard
-                                href={project.href}
+                                href={`/projects/${project.slug}`}
                                 key={project.title}
                                 title={project.title}
                                 description={project.description}
@@ -46,7 +46,6 @@ export default function ProjectsSection() {
                                 tags={project.technologies}
                                 image={project.image}
                                 imageClassName={"imageClassName" in project ? (project.imageClassName as string) : undefined}
-                                video={project.video}
                                 links={project.links}
                             />
                         </BlurFade>
