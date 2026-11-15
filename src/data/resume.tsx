@@ -180,31 +180,6 @@ export const DATA = {
       imageClassName: "object-contain bg-black",
     },
     {
-      slug: "doodle",
-      title: "Doodle",
-      subtitle: "On-chain freelance marketplace · Hexafalls (MLH × Solana)",
-      href: "https://github.com/wolf1276/doodle-hexafalls",
-      dates: "2026",
-      active: true,
-      description:
-        "A non-custodial, milestone-based freelance payment protocol on Solana with escrow vaults and a recomputable on-chain reputation score. Built as a team at Hexafalls, where it won the MLH × Solana track and placed 3rd overall.",
-      bullets: [
-        "Freelance platforms hold client funds, take large fees and own each freelancer's reputation. Doodle holds funds in program-derived vaults with no private key and releases them by milestone under fixed on-chain rules.",
-        "Clients and creators agree on milestones, fund an escrow vault, and release payment on-chain as each milestone is delivered.",
-        "Reputation is derived deterministically from on-chain history that anyone can recompute.",
-        "Won the MLH × Solana track and placed 3rd overall at Hexafalls.",
-      ],
-      technologies: ["Solana", "Anchor", "Rust", "Next.js"],
-      links: [
-        {
-          type: "Source",
-          href: "https://github.com/wolf1276/doodle-hexafalls",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/projects/doodle-banner.webp",
-    },
-    {
       slug: "jigyasa",
       title: "Jigyasa",
       subtitle: "Voice-Enabled Hindi RAG Assistant",
@@ -343,21 +318,6 @@ export const DATA = {
     },
   ],
   achievements: [
-    {
-      title: "Hexafalls (MLH × Solana)",
-      dates: "2026",
-      location: "",
-      description:
-        "Solana Track Winner and 3rd Runner-up overall, with Doodle, an on-chain freelance marketplace with milestone escrow.",
-      image: "/logos/hexafalls.webp",
-      links: [
-        {
-          title: "Doodle",
-          icon: <Icons.github className="h-4 w-4" />,
-          href: "https://github.com/wolf1276/doodle-hexafalls",
-        },
-      ],
-    },
     {
       title: "ISEA 2026 Hackathon",
       dates: "March 2026",

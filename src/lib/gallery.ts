@@ -7,7 +7,7 @@ const EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif"]);
 
 /**
  * Every image dropped into /public/gallery shows up automatically.
- * The file name becomes the caption: "hexafalls-team-photo.jpg" -> "Hexafalls team photo".
+ * The file name becomes the caption: "team-photo.jpg" -> "Team photo".
  * Files are listed in name order, so prefix with 01-, 02-... to control the order.
  */
 export function getGalleryImages(): GalleryImage[] {
