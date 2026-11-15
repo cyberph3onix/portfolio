@@ -149,6 +149,34 @@ export const DATA = {
   ],
   projects: [
     {
+      slug: "cybermatrix",
+      title: "CyberMatrix",
+      subtitle: "Evidence-Based Risk Assessment, Verifiable On-Chain",
+      href: "https://cybermatrix-web.onrender.com/",
+      dates: "2026",
+      active: true,
+      description:
+        "Submit a URL, domain, email, message or QR image and get an evidence-based risk assessment. Every report can be committed on-chain and verified by anyone.",
+      bullets: [
+        "Accepts URLs, domains, emails, messages and QR images and returns an evidence-based risk assessment.",
+        "Reports can be committed on-chain so anyone can independently verify them.",
+      ],
+      technologies: [],
+      links: [
+        {
+          type: "Website",
+          href: "https://cybermatrix-web.onrender.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/cyberph3onix/cybermatrix",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/projects/cybermatrix.png",
+    },
+    {
       slug: "kairos",
       title: "Kairos",
       subtitle: "Intent-Based Non-Custodial Capital Delegation",
