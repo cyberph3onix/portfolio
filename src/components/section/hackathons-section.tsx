@@ -19,7 +19,7 @@ export default function HackathonsSection() {
           <div className="flex flex-col gap-y-3 items-center justify-center">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center">Hackathons &amp; recognition</h2>
             <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
-              4x hackathon winner. I like turning ideas into working prototypes in a weekend, from zero-knowledge credentials to non-custodial wallets.
+              5x hackathon winner. I like turning ideas into working prototypes in a weekend, from zero-knowledge credentials to non-custodial wallets.
             </p>
           </div>
         </div>

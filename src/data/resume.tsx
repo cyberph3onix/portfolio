@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, FileTextIcon, NotebookIcon } from "lucide-react";
+import { HomeIcon, FileTextIcon } from "lucide-react";
 
 export const RESUME_PDF = "/27octcv.pdf";
 
@@ -11,9 +11,9 @@ export const DATA = {
   locationLink: "https://www.google.com/maps/place/kolkata",
   tagline: "AI, Systems & Web3 Builder",
   description:
-    "Computer Science student building AI, systems and Web3 products. 4x hackathon winner, researching post-quantum security at ISI Kolkata.",
+    "Computer Science student building AI, systems and Web3 products. 5x hackathon winner, researching post-quantum security at ISI Kolkata.",
   summary:
-    "I'm a Computer Science and Engineering student at the [Institute of Engineering & Management, Kolkata](https://iem.edu.in/). I work across AI, systems and Web3: from hybrid RAG pipelines and voice assistants to zero-knowledge credentials and non-custodial smart wallets on Stellar. Right now I'm a research intern at the Indian Statistical Institute, working on making 5G authentication quantum-safe for constrained IoT devices. Outside research, I'm a Stellar Ambassador and the Tech Lead at GDG IEM. I've won four hackathons and I'm always looking for something new to build.",
+    "I'm a Computer Science and Engineering student at the [Institute of Engineering & Management, Kolkata](https://iem.edu.in/). I work across AI, systems and Web3: from hybrid RAG pipelines and voice assistants to zero-knowledge credentials and non-custodial smart wallets on Stellar. Right now I'm a research intern at the Indian Statistical Institute, working on making 5G authentication quantum-safe for constrained IoT devices. Outside research, I'm a Stellar Ambassador and the Tech Lead at GDG IEM. I've won five hackathons and I'm always looking for something new to build.",
   avatarUrl: "/me.png",
   skills: [
     {
@@ -47,7 +47,6 @@ export const DATA = {
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" },
     { href: "/resume", icon: FileTextIcon, label: "Resume" },
   ],
   contact: {
@@ -346,6 +345,31 @@ export const DATA = {
     },
   ],
   achievements: [
+    {
+      title: "HackMatrix 2026",
+      dates: "November 2026",
+      location: "Adamas University, Kolkata",
+      description:
+        "Winner. Built CyberMatrix, an evidence-based risk assessment tool whose reports can be committed on-chain and verified by anyone. Co-powered by ACM and MLH.",
+      image: "/projects/cybermatrix.png",
+      links: [
+        {
+          title: "Website",
+          icon: <Icons.globe className="h-4 w-4" />,
+          href: "https://hackmatrix.codes/",
+        },
+        {
+          title: "CyberMatrix",
+          icon: <Icons.globe className="h-4 w-4" />,
+          href: "https://cybermatrix-web.onrender.com/",
+        },
+        {
+          title: "Source",
+          icon: <Icons.github className="h-4 w-4" />,
+          href: "https://github.com/cyberph3onix/cybermatrix",
+        },
+      ],
+    },
     {
       title: "ISEA 2026 Hackathon",
       dates: "March 2026",
